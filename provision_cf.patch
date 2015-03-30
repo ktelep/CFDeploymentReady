@@ -1,0 +1,11 @@
+--- provision_cf	2015-03-29 12:10:06.997483439 +0000
++++ provision_cf.new	2015-03-29 12:09:34.829888876 +0000
+@@ -53,7 +53,7 @@
+ }
+ 
+ bosh_lite_ip() {
+-  ip=192.168.50.4
++  ip=$(get_ip_from_vagrant_ssh_config)
+   # Local VMs show up as 127.0.0.1 in ssh-config so we need to find their IP elsewhere
+   if [ $ip = "127.0.0.1" ]; then
+     ip=$(get_ip_from_vm_ifconfig)
