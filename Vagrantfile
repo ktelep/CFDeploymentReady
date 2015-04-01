@@ -39,6 +39,7 @@ sudo cp /tmp/go/src/github.com/cloudfoundry-incubator/spiff/spiff /usr/local/bin
 sudo chmod a+x /usr/local/bin/spiff
 rm -rf /tmp/go
 
+echo "Provisioning Complete"
 
 SCRIPT
 
@@ -48,8 +49,6 @@ Vagrant.configure(2) do |config|
 	  cloudfoundry.vm.provider :virtualbox do |v, override|
 	      override.vm.network :private_network, ip: '192.168.50.4', id: :local
               override.vm.network :public_network
-	      v.memory = 3192
-	      v.cpus = 2
   	  end
   end
 
@@ -62,5 +61,6 @@ Vagrant.configure(2) do |config|
 		  v.memory = 2048
 		  v.cpus = 2
 	  end
+      manager.vm.post_up_message = "vagrant ssh into the manager, cd into ~/bosh-lite/bin and execute ./provision_cf\n,Once completed you will also need to add a route to 10.244.0.0/19 via 192.168.50.4 to the host\n,you wish to run your cf commands on.\n"
   end
 end
